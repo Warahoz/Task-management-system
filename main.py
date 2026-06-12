@@ -1,15 +1,15 @@
-from task_manager.task_utils import add_task, mark_task_as_complete, view_pending_tasks, calculate_progress, tasks
+# Import functions from task_manager.task_utils package
+from task_utils import add_task, mark_task_as_complete, view_pending_tasks, calculate_progress, tasks
 
 # Define the main function
 def main():
     while True:
-        print("\nTask Management System")
+        print("Task Management System")
         print("1. Add Task")
         print("2. Mark Task as Complete")
         print("3. View Pending Tasks")
         print("4. View Progress")
         print("5. Exit")
-        
         choice = input("Enter your choice (1-5): ")
         
         if choice == "1":
@@ -19,14 +19,6 @@ def main():
             add_task(title, description, due_date)
             
         elif choice == "2":
-            if not tasks:
-                print("No tasks available to update.")
-                continue
-            # Display target indexes so the user knows what number to input
-            for i, t in enumerate(tasks):
-                status = "Complete" if t["completed"] else "Pending"
-                print(f"{i+1}. {t['title']} ({status})")
-                
             index_input = input("Enter the number of the task to mark complete: ")
             mark_task_as_complete(index_input)
             
@@ -35,9 +27,8 @@ def main():
             
         elif choice == "4":
             progress = calculate_progress()
-            if tasks:
-                print(f"Current Progress: {progress:.2f}% of tasks completed.")
-                
+            print(f"Current Progress: {progress:.2f}%")
+            
         elif choice == "5":
             print("Exiting the program...")
             break
