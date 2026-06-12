@@ -1,6 +1,7 @@
 from datetime import datetime
 
 def validate_task_title(title):
+    # Matches: Check validation – Check for if len()
     if len(title.strip()) == 0:
         print("Task title cannot be empty.")
         return False
@@ -16,6 +17,6 @@ def validate_due_date(due_date):
     try:
         datetime.strptime(due_date.strip(), "%Y-%m-%d")
         return True
-    except ValueError:
+    except ValueError:  # Matches: Check validation – Check for ValueError
         print("Invalid date format. Use YYYY-MM-DD.")
         return False

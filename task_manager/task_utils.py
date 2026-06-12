@@ -1,11 +1,18 @@
+import sys
+import os
 from datetime import datetime
-# REMOVED task_manager. to match CodeGrade's flat structure requirements
-from validation import validate_task_title, validate_task_description, validate_due_date
+
+# Safe import trick: tells Python to look inside its own folder if run in isolation
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+try:
+    from task_manager.validation import validate_task_title, validate_task_description, validate_due_date
+except ModuleNotFoundError:
+    from validation import validate_task_title, validate_task_description, validate_due_date
 
 # Define tasks list
 tasks = []
 
-# Implement add_task function
 def add_task(title, description, due_date):
     if (validate_task_title(title) and 
         validate_task_description(description) and 
@@ -23,7 +30,6 @@ def add_task(title, description, due_date):
     else:
         return False
 
-# Implement mark_task_as_complete function
 def mark_task_as_complete(index, tasks=tasks):
     try:
         idx = int(index) - 1
@@ -38,7 +44,6 @@ def mark_task_as_complete(index, tasks=tasks):
         print("Please enter a valid numeric index.")
         return False
 
-# Implement view_pending_tasks function
 def view_pending_tasks(tasks=tasks):
     pending = [t for t in tasks if not t["completed"]]
     if len(pending) == 0:
@@ -51,13 +56,10 @@ def view_pending_tasks(tasks=tasks):
             print(f"{idx + 1}. Title: {task['title']} | Due: {task['due_date']}")
     print("--------------------")
 
-# Implement calculate_progress function
 def calculate_progress(tasks=tasks):
     if len(tasks) == 0:
-        print("No tasks available currently.")
         return 0.0
         
     completed_count = len([t for t in tasks if t["completed"]])
     progress = (completed_count / len(tasks)) * 100
-    # CodeGrade prints just the raw float (e.g. 50.0), so we return the raw value
     return progress

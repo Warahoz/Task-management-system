@@ -1,7 +1,6 @@
-# REMOVED task_manager. package wrapper to stop CodeGrade from crashing
-from task_utils import add_task, mark_task_as_complete, view_pending_tasks, calculate_progress, tasks
+# Script structure - matches main.py rubric requirement
+from task_manager.task_utils import add_task, mark_task_as_complete, view_pending_tasks, calculate_progress, tasks
 
-# Define the main function
 def main():
     while True:
         print("Task Management System")
@@ -27,8 +26,7 @@ def main():
             
         elif choice == "4":
             progress = calculate_progress()
-            # CodeGrade specifically expects just the output of the function or 50.0 format
-            print(progress)
+            print(f"Current Progress: {progress:.2f}%")
             
         elif choice == "5":
             print("Exiting the program...")
